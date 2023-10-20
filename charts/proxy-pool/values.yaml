@@ -11,7 +11,7 @@ image:
   tag: "2.4.1"
 
 imagePullSecrets: []
-nameOverride: ""
+nameOverride: "proxy-pool"
 fullnameOverride: ""
 
 redis:
