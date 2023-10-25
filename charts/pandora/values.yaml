@@ -11,8 +11,8 @@ image:
   tag: "1.3.5"
 
 env:
-  CHATGPT_API_PREFIX: https://ai.fakeopen.com
-  PANDORA_SERVER: 0.0.0.0:80
+  CHATGPT_API_PREFIX: "https://ai.fakeopen.com"
+  PANDORA_SERVER: "0.0.0.0:80"
   PANDORA_LOGIN_LOCAL: false
   PANDORA_VERBOSE: true
   PANDORA_CLOUD: cloud
