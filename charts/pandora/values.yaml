@@ -59,7 +59,7 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
   tls:
-    - secretName: chart-example-tls
+    - secretName: chat-example-tls
       hosts:
       - chat.doki.life
 
