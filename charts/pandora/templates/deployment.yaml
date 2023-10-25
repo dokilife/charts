@@ -51,9 +51,9 @@ spec:
             - name: PANDORA_SERVER
               value: {{ .Values.env.PANDORA_SERVER }}
             - name: PANDORA_LOGIN_LOCAL
-              value: {{ .Values.env.PANDORA_LOGIN_LOCAL }}
+              value: {{ if .Values.env.PANDORA_LOGIN_LOCAL }}true{{ else }}false{{ end }}
             - name: PANDORA_VERBOSE
-              value: {{ .Values.env.PANDORA_VERBOSE }}
+              value: {{ if .Values.env.PANDORA_VERBOSE }}true{{ else }}false{{ end }}
             - name: PANDORA_CLOUD
               value: {{ .Values.env.PANDORA_CLOUD }}
           resources:
