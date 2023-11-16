@@ -11,7 +11,7 @@ image:
   tag: "0.1.1"
 
 env:
-  PANDORA_NEXT_LICENSE: ""
+  PANDORA_NEXT_LICENSE: "Change u jwt token"
 
 imagePullSecrets: []
 nameOverride: ""
