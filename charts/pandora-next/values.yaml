@@ -46,14 +46,14 @@ service:
 ingress:
   enabled: true
   className: "nginx"
-  annotations: {}
+  annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-dns01"
   hosts:
     - host: chat.doki.life
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
+  tls:
     - secretName: chat-example-tls
       hosts:
       - chat.doki.life
