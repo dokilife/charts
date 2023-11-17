@@ -8,7 +8,7 @@ image:
   repository: pengzhile/pandora-next
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.1.1"
+  tag: "0.1.2"
 
 env:
   PANDORA_NEXT_LICENSE: "Change u jwt token"
