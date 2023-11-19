@@ -2,19 +2,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}-postgresql
+  labels:
+    app: {{ template "doki.name" . }}
+    chart: {{ template "doki.chart" . }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-postgresql
+      app: {{ template "doki.name" . }}
+      release: {{ .Release.Name | quote }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-postgresql
+        app: {{ template "doki.name" . }}
+        release: {{ .Release.Name | quote }}
     spec:
       containers:
         - name: postgresql
-          image: postgres:{{ .Values.postgresql.tag }}
+          image: postgres:latest
           env:
             - name: POSTGRES_USER
               value: {{ .Values.postgresql.postgresqlUsername }}
@@ -33,3 +40,5 @@ spec:
         - name: postgresql-storage
           persistentVolumeClaim:
             claimName: {{ include "doki.fullname" . }}
+        - name: backup-storage
+          emptyDir: {}
