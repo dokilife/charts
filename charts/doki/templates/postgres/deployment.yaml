@@ -12,12 +12,12 @@ spec:
   selector:
     matchLabels:
       app: {{ template "doki.name" . }}
-      release: {{ .Release.Name | quote }}
+      release: {{ .Release.Name | quote }}-postgresql
   template:
     metadata:
       labels:
         app: {{ template "doki.name" . }}
-        release: {{ .Release.Name | quote }}
+        release: {{ .Release.Name | quote }}-postgresql
     spec:
       containers:
         - name: postgresql
