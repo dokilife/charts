@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}-backup-job
+  labels:
+    app: {{ template "doki.name" . }}
+    chart: {{ template "doki.chart" . }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+spec:
+  schedule: {{ .Values.postgresql.backup.schedule }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: backup
+              image: postgres:{{ .Values.postgresql.tag }}
+              env:
+                - name: PGPASSWORD
+                  value: {{ .Values.postgresql.postgresqlPassword | quote }}
+              command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  mkdir -p /backup/$(date +\%Y-\%m-\%d)
+                  pg_dump -h {{ .Release.Name }}-postgresql -U {{ .Values.postgresql.postgresqlUsername }} {{ .Values.postgresql.postgresqlDatabase }} > /backup/$(date +\%Y-\%m-\%d)/db_backup.sql
+          restartPolicy: OnFailure
+          volumes:
+            - name: backup-storage
+              emptyDir: {}
+      backoffLimit: 4
