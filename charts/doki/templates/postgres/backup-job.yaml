@@ -23,12 +23,12 @@ spec:
                 - /bin/sh
                 - -c
                 - "pg_dumpall -h {{ .Release.Name }}-postgresql -U {{ .Values.postgresql.postgresqlUsername }} > /backup/pg_dumpall-$(date '+%Y-%m-%d-%H-%M').pgdump"
+              volumeMounts:
+                - name: postgresql-storage
+                  mountPath: /var/lib/postgresql/data
+                - name: backup-storage
+                  mountPath: /backup
           restartPolicy: OnFailure
-          volumeMounts:
-            - name: postgresql-storage
-              mountPath: /var/lib/postgresql/data
-            - name: backup-storage
-              mountPath: /backup
           volumes:
             - name: postgresql-storage
               persistentVolumeClaim:
