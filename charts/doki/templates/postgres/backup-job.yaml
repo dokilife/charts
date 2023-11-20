@@ -19,12 +19,16 @@ spec:
               env:
                 - name: PGPASSWORD
                   value: {{ .Values.postgresql.postgresqlPassword | quote }}
-              command: ["/bin/sh", "-c"]
-              args:
-                - |
-                  mkdir -p /backup/$(date +\%Y-\%m-\%d)
-                  pg_dump -h {{ .Release.Name }}-postgresql -U {{ .Values.postgresql.postgresqlUsername }} {{ .Values.postgresql.postgresqlDatabase }} > /backup/$(date +\%Y-\%m-\%d)/db_backup.sql
+              command:
+                - /bin/sh
+                - -c
+                - "pg_dumpall -h {{ .Release.Name }}-postgresql -U {{ .Values.postgresql.postgresqlUsername }} > /backup/pg_dumpall-$(date '+%Y-%m-%d-%H-%M').pgdump"
           restartPolicy: OnFailure
+          volumeMounts:
+            - name: postgresql-storage
+              mountPath: /var/lib/postgresql/data
+            - name: backup-storage
+              mountPath: /backup
           volumes:
             - name: postgresql-storage
               persistentVolumeClaim:
