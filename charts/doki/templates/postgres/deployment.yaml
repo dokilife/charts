@@ -41,4 +41,5 @@ spec:
           persistentVolumeClaim:
             claimName: {{ include "doki.fullname" . }}
         - name: backup-storage
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: {{ include "doki.fullname" . }}-backup
