@@ -26,6 +26,10 @@ spec:
                   pg_dump -h {{ .Release.Name }}-postgresql -U {{ .Values.postgresql.postgresqlUsername }} {{ .Values.postgresql.postgresqlDatabase }} > /backup/$(date +\%Y-\%m-\%d)/db_backup.sql
           restartPolicy: OnFailure
           volumes:
+            - name: postgresql-storage
+              persistentVolumeClaim:
+                claimName: {{ include "doki.fullname" . }}
             - name: backup-storage
-              emptyDir: {}
+              persistentVolumeClaim:
+                claimName: {{ include "doki.fullname" . }}-backup
       backoffLimit: 4
