@@ -10,9 +10,6 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "0.3.0"
 
-env:
-  PANDORA_NEXT_LICENSE: "Change u jwt token"
-
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -82,3 +79,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+storage:
+  storageClass: nfs-client

@@ -37,19 +37,15 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-          env:
-            - name: license_id
-              value: {{ .Values.env.PANDORA_NEXT_LICENSE }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: pandora-next-data
+              mountPath: /data
+      volumes:
+        - name: pandora-next-data
+          persistentVolumeClaim:
+            claimName: {{ include "pandora-next.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
