@@ -46,7 +46,7 @@ spec:
               path: /
               port: http
           env:
-            - name: PANDORA_NEXT_LICENSE
+            - name: license_id
               value: {{ .Values.env.PANDORA_NEXT_LICENSE }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
