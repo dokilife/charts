@@ -99,7 +99,7 @@ tolerations: []
 affinity: {}
 
 postgresql:
-  tag: "16.1-alpine3.18"
+  tag: "16.1"
   
   enabled: true
   postgresqlUsername: your_username
