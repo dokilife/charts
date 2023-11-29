@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: postgresql
-          image: postgres:latest
+          image: postgres:{{ .Values.postgresql.tag }}
           env:
             - name: POSTGRES_USER
               value: {{ .Values.postgresql.postgresqlUsername }}

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-redis
+  labels:
+    app: {{ template "doki.name" . }}
+    chart: {{ template "doki.chart" . }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "doki.name" . }}
+      release: {{ .Release.Name | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "doki.name" . }}
+        release: {{ .Release.Name | quote }}
+    spec:
+      containers:
+        - name: redis
+          image: redis:{{ .Values.redis.tag }}
+          ports:
+            - containerPort: 6379

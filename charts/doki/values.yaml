@@ -110,3 +110,6 @@ postgresql:
     enabled: true
     schedule: "0 0 * * *"
     retention: 7
+
+redis:
+  tag: "7.2.3-alpine3.18"
