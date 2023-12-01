@@ -24,3 +24,10 @@ spec:
           image: redis:{{ .Values.redis.tag }}
           ports:
             - containerPort: 6379
+          volumeMounts:
+            - name: redis-storage
+              mountPath: /data
+      volumes:
+        - name: redis-storage
+          persistentVolumeClaim:
+            claimName: {{ include "doki.fullname" . }}-redis

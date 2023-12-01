@@ -113,3 +113,4 @@ postgresql:
 
 redis:
   tag: "7.2.3-alpine3.18"
+  storageClass: nfs-client
