@@ -46,14 +46,14 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-dns01"
   hosts:
-    - host: chat.doki.life
+    - host: openai.doki.life
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls:
     - secretName: chat-example-tls
       hosts:
-      - chat.doki.life
+      - openai.doki.life
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
