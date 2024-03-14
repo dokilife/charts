@@ -8,7 +8,7 @@ image:
   repository: yidadaa/chatgpt-next-web
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v2.11.2"
+  tag: "v2.11.3"
 
 imagePullSecrets: []
 nameOverride: ""
